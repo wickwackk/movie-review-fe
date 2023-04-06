@@ -17,10 +17,10 @@ export default function MovieCard({ movie }: PropType) {
           />
         </picture>
         <p className="flex gap-1">
-          <picture>
-            {}
-            <img className="h-[20px] w-[20px]" src="/metricFresh.svg" alt="" />
-          </picture>
+          {/* <picture>
+            {movie.tomatoes.viewer.meter > 60 (<img className="h-[20px] w-[20px]" src="/metricFresh.svg" alt="" />) ?(<img className="h-[20px] w-[20px]" src="/metricRotten.svg" alt="" />) :}
+            
+          </picture> */}
           {movie.tomatoes.viewer.meter
             ? `${movie.tomatoes.viewer.meter}%`
             : "no meter"}
