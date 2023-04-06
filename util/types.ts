@@ -1,3 +1,21 @@
+type AwardsType = {
+  wins: number;
+  nominations: number;
+  text: string;
+};
+
+type ImdbType = {
+  rating: number;
+  votes: number;
+  id: number;
+};
+type ViewerType = {
+  rating: number;
+  numReviews: number;
+  meter: number;
+};
+type TomatoesType = { viewer: ViewerType; lastUpdated: Date };
+
 export interface MovieType {
   _id: string;
   plot?: string;
@@ -18,5 +36,5 @@ export interface MovieType {
   year?: number;
   imdb?: ImdbType;
   type?: string;
-  tomatoes?: TomatoesType;
+  tomatoes: TomatoesType;
 }

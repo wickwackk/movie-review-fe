@@ -6,14 +6,28 @@
 // const inter = Inter({ subsets: ["latin"] });
 
 import LayoutComp from "@/components/LayoutComp";
-import Home from "../components/Home";
+import { MovieType } from "@/util/types";
+import axios from "axios";
+import Homepage from "../components/Homepage";
 
-export default function App(): JSX.Element {
+export default function Home(props: { movies: MovieType[] }) {
+  const { movies } = props;
   return (
     <div className="main">
       <LayoutComp>
-        <Home />
+        <Homepage movies={movies} />
       </LayoutComp>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const res = await axios.get("http://localhost:2080/movies");
+  const movies = await res.data;
+  // console.log("movies", movies);
+  return {
+    props: {
+      movies: movies,
+    },
+  };
 }

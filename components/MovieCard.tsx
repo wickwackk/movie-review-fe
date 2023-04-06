@@ -1,62 +1,31 @@
 import Link from "next/link";
-
-type AwardsType = {
-  wins: number;
-  nominations: number;
-  text: string;
-};
-
-type ImdbType = {
-  rating: number;
-  votes: number;
-  id: number;
-};
-type ViewerType = {
-  rating: number;
-  numReviews: number;
-  meter: number;
-};
-type TomatoesType = { viewer: ViewerType; lastUpdated: Date };
-
-interface MovieType {
-  _id: string;
-  plot: string;
-  genres: string[];
-  runtime: number;
-  poster?: string;
-  cast: string[];
-  num_mflix_comments: number;
-  title: string;
-  fullplot: string;
-  languages: string[];
-  released: Date;
-  directors: string[];
-  rated?: string;
-  awards: AwardsType;
-  lastupdated: string;
-  year: number;
-  imdb: ImdbType;
-  countries: string[];
-  type: string;
-  tomatoes: TomatoesType;
-}
+import { MovieType } from "@/util/types";
 
 type PropType = {
-  prop: MovieType;
+  movie: MovieType;
 };
 
-export default function MovieCard({ prop }: PropType) {
+export default function MovieCard({ movie }: PropType) {
   return (
-    <Link href={prop.id}>
-      <div className=" w-[200px] h-[300px]">
+    <Link href={`movie/${movie._id}`}>
+      <div className=" p-2 bg-white rounded-xl w-[200px] h-[350px]">
         <picture>
           <img
-            className=" w-[200px] h-[250px]"
-            src={prop.poster}
-            alt={prop.title}
+            className=" rounded-xl w-[200px] h-[250px]"
+            src={movie.poster}
+            alt={movie.title}
           />
         </picture>
-        <p>{prop.title}</p>
+        <p className="flex gap-1">
+          <picture>
+            {}
+            <img className="h-[20px] w-[20px]" src="/metricFresh.svg" alt="" />
+          </picture>
+          {movie.tomatoes.viewer.meter
+            ? `${movie.tomatoes.viewer.meter}%`
+            : "no meter"}
+        </p>
+        <p className="text-sm">{movie.title}</p>
       </div>
     </Link>
   );
